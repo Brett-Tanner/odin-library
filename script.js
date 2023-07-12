@@ -1,4 +1,5 @@
 "use strict";
+let library = [];
 class Book {
     constructor(title, author, pages, read) {
         this.title = title;
@@ -7,5 +8,9 @@ class Book {
         this.read = read;
     }
 }
-const newBook = new Book("Pizza", "Me", 10, false);
-console.log(newBook);
+function addBook(title, author, pages, read) {
+    const newBook = new Book(title, author, pages, read);
+    library.push(newBook);
+    console.log(library);
+}
+addBook("Pizza", "Pizza Lover", 10, false);
