@@ -10,6 +10,29 @@
   <body>
     <h1>Brett's Library</h1>
 
-    <div id="bookcase"></div>
+    <div id="bookcase">
+      <a href="" id="addBook" class="book">+</a>
+    </div>
+
+    <form action="" id="bookForm">
+      <div class="field">
+        <label for="title">Title</label>
+        <input type="text" name="title" id="title" />
+      </div>
+      <div class="field">
+        <label for="author">Author</label>
+        <input type="text" name="author" id="author" />
+      </div>
+      <div class="field">
+        <label for="pages">Pages</label>
+        <input type="number" name="pages" id="pages" />
+      </div>
+      <div class="field">
+        <label for="read">Read</label>
+        <input type="checkbox" name="read" id="read" />
+      </div>
+
+      <button type="submit" id="submitBook">Add Book</button>
+    </form>
   </body>
 </html>

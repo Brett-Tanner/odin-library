@@ -1,6 +1,21 @@
 "use strict";
 const library = [];
 const bookCase = document.getElementById("bookcase");
+const addBookButton = document.getElementById("addBook");
+const bookForm = document.getElementById("bookForm");
+const submitBook = document.getElementById("submitBook");
+submitBook.addEventListener("click", (e) => {
+    e.preventDefault();
+    const titleInput = document.getElementById("title");
+    const title = titleInput ? titleInput.value : "Untitled";
+    const authorInput = document.getElementById("author");
+    const author = authorInput ? authorInput.value : "Anonymous";
+    const pagesInput = document.getElementById("pages");
+    const pages = pagesInput && pagesInput.value ? parseInt(pagesInput.value) : 0;
+    const checkBox = document.getElementById("read");
+    const read = checkBox && checkBox.checked ? true : false;
+    addBook(title, author, pages, read);
+});
 class Book {
     constructor(title, author, pages, read) {
         this.title = title;
@@ -36,6 +51,7 @@ function createDisplayBook(book) {
 }
 function showLibrary() {
     bookCase.innerHTML = "";
+    bookCase.appendChild(addBookButton);
     for (const book of library) {
         const displayBook = createDisplayBook(book);
         bookCase === null || bookCase === void 0 ? void 0 : bookCase.appendChild(displayBook);

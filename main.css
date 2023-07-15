@@ -2,16 +2,41 @@
   --spacer: 1rem;
 }
 
+body {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+}
+
 h3,
 h4,
 p {
   margin: 0;
+  text-align: center;
 }
 
 #bookcase {
+  width: 100dvw;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr));
+  place-items: center;
   gap: var(--spacer);
+}
+
+#addBook {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 36px;
+  color: grey;
+  text-decoration: none;
+}
+
+#addBook:hover {
+  background: lightgrey;
+}
+#addBook:active {
+  background: darkgrey;
 }
 
 .book {
@@ -21,6 +46,8 @@ p {
   justify-content: flex-start;
   padding: var(--spacer);
   border: 1px solid black;
+  height: 20vh;
+  width: 15vh;
 }
 
 .book .info {

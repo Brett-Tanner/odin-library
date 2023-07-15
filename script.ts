@@ -1,5 +1,22 @@
 const library: Book[] = [];
 const bookCase = document.getElementById("bookcase")!;
+const addBookButton = document.getElementById("addBook")!;
+const bookForm = document.getElementById("bookForm")!;
+const submitBook = document.getElementById("submitBook")!;
+
+submitBook.addEventListener("click", (e) => {
+  e.preventDefault();
+  const titleInput = <HTMLInputElement>document.getElementById("title");
+  const title = titleInput ? titleInput.value : "Untitled";
+  const authorInput = <HTMLInputElement>document.getElementById("author");
+  const author = authorInput ? authorInput.value : "Anonymous";
+  const pagesInput = <HTMLInputElement>document.getElementById("pages");
+  const pages = pagesInput && pagesInput.value ? parseInt(pagesInput.value) : 0;
+  const checkBox = <HTMLInputElement>document.getElementById("read");
+  const read = checkBox && checkBox.checked ? true : false;
+
+  addBook(title, author, pages, read);
+});
 
 class Book {
   title: string;
@@ -50,6 +67,7 @@ function createDisplayBook(book: Book) {
 
 function showLibrary() {
   bookCase.innerHTML = "";
+  bookCase.appendChild(addBookButton);
   for (const book of library) {
     const displayBook: HTMLDivElement = createDisplayBook(book);
     bookCase?.appendChild(displayBook);
