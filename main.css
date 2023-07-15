@@ -1,0 +1,29 @@
+:root {
+  --spacer: 1rem;
+}
+
+h3,
+h4,
+p {
+  margin: 0;
+}
+
+#bookcase {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(200px, 100%), 1fr));
+  gap: var(--spacer);
+}
+
+.book {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  padding: var(--spacer);
+  border: 1px solid black;
+}
+
+.book .info {
+  display: flex;
+  gap: var(--spacer);
+}
