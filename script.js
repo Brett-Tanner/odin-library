@@ -7,13 +7,19 @@ const submitBook = document.getElementById("submitBook");
 submitBook.addEventListener("click", (e) => {
     e.preventDefault();
     const titleInput = document.getElementById("title");
-    const title = titleInput ? titleInput.value : "Untitled";
+    const title = titleInput instanceof HTMLInputElement && titleInput.value !== ""
+        ? titleInput.value
+        : "Untitled";
     const authorInput = document.getElementById("author");
-    const author = authorInput ? authorInput.value : "Anonymous";
+    const author = authorInput instanceof HTMLInputElement && authorInput.value !== ""
+        ? authorInput.value
+        : "Anonymous";
     const pagesInput = document.getElementById("pages");
-    const pages = pagesInput && pagesInput.value ? parseInt(pagesInput.value) : 0;
+    const pages = pagesInput instanceof HTMLInputElement && pagesInput.value
+        ? parseInt(pagesInput.value)
+        : 0;
     const checkBox = document.getElementById("read");
-    const read = checkBox && checkBox.checked ? true : false;
+    const read = checkBox instanceof HTMLInputElement && checkBox.checked ? true : false;
     addBook(title, author, pages, read);
 });
 class Book {
