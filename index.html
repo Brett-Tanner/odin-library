@@ -5,34 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Odin Library</title>
     <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="modal.css" />
     <script src="script.js" defer></script>
   </head>
   <body>
+    <div id="addBookModal" class="modal">
+      <div class="modal-header">
+        <button class="modalToggle">X</button>
+      </div>
+
+      <div class="modal-body">
+        <form action="" id="bookForm">
+          <div class="field">
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title" placeholder="Title" />
+          </div>
+          <div class="field">
+            <label for="author">Author</label>
+            <input type="text" name="author" id="author" placeholder="Author" />
+          </div>
+          <div class="field">
+            <label for="pages">Pages</label>
+            <input
+              type="number"
+              name="pages"
+              id="pages"
+              placeholder="Number of Pages"
+            />
+          </div>
+          <div class="field">
+            <label for="read">Read</label>
+            <input type="checkbox" name="read" id="read" />
+          </div>
+          <button type="submit" id="submitBook" class="modalToggle">
+            Add Book
+          </button>
+        </form>
+      </div>
+    </div>
+
     <h1>Brett's Library</h1>
 
     <div id="bookcase">
-      <a href="" id="addBook" class="book">+</a>
+      <button id="addBook" class="book modalToggle">+</button>
     </div>
-
-    <form action="" id="bookForm">
-      <div class="field">
-        <label for="title">Title</label>
-        <input type="text" name="title" id="title" />
-      </div>
-      <div class="field">
-        <label for="author">Author</label>
-        <input type="text" name="author" id="author" />
-      </div>
-      <div class="field">
-        <label for="pages">Pages</label>
-        <input type="number" name="pages" id="pages" />
-      </div>
-      <div class="field">
-        <label for="read">Read</label>
-        <input type="checkbox" name="read" id="read" />
-      </div>
-
-      <button type="submit" id="submitBook">Add Book</button>
-    </form>
   </body>
 </html>

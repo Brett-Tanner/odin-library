@@ -1,8 +1,19 @@
 const library: Book[] = [];
 const bookCase = document.getElementById("bookcase")!;
 const addBookButton = document.getElementById("addBook")!;
-const bookForm = document.getElementById("bookForm")!;
+const modalToggles = document.querySelectorAll(".modalToggle")!;
+const addBookModal = document.getElementById("addBookModal")!;
 const submitBook = document.getElementById("submitBook")!;
+
+function addModalButton(modalToggles: NodeList) {
+  modalToggles.forEach((button) => {
+    button.addEventListener("click", () => {
+      addBookModal.classList.toggle("show");
+    });
+  });
+}
+
+addModalButton(modalToggles);
 
 submitBook.addEventListener("click", (e) => {
   e.preventDefault();
@@ -65,7 +76,7 @@ function createDisplayBook(book: Book) {
   const info = document.createElement("div");
   info.classList.add("info");
   const pages = document.createElement("p");
-  pages.innerText = book.pages.toString();
+  pages.innerText = `Pages: ${book.pages.toString()}`;
   info.appendChild(pages);
   const read = document.createElement("p");
   read.innerText = book.read ? "Read" : "Unread";

@@ -1,5 +1,6 @@
 :root {
   --spacer: 1rem;
+  --h2-size: calc(1.275rem + 0.3vw);
 }
 
 body {
@@ -51,6 +52,9 @@ p {
 }
 
 .book .info {
+  flex-grow: 1;
   display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
   gap: var(--spacer);
 }
