@@ -1,6 +1,8 @@
 :root {
-  --spacer: 1rem;
+  --danger: #dc3545;
   --h2-size: calc(1.275rem + 0.3vw);
+  --spacer: 1rem;
+  --success: #198754;
 }
 
 body {
@@ -57,4 +59,12 @@ p {
   flex-flow: column wrap;
   justify-content: center;
   gap: var(--spacer);
+}
+
+.book button.read {
+  background: var(--success);
+}
+
+.book button.unread {
+  background: var(--danger);
 }

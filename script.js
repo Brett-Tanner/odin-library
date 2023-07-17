@@ -33,8 +33,17 @@ class Book {
         const pages = document.createElement("p");
         pages.innerText = `Pages: ${book.pages.toString()}`;
         info.appendChild(pages);
-        const read = document.createElement("p");
-        read.innerText = book.read ? "Read" : "Unread";
+        const read = document.createElement("button");
+        read.innerText = this.read ? "Read" : "Unread";
+        if (this.read) {
+            read.classList.add("read");
+        }
+        else {
+            read.classList.add("unread");
+        }
+        read.addEventListener("click", () => {
+            this.toggleRead(read);
+        });
         info.appendChild(read);
         const removeButton = document.createElement("button");
         removeButton.dataset.index = index.toString();
@@ -50,6 +59,19 @@ class Book {
         info.appendChild(removeButton);
         displayBook.appendChild(info);
         return displayBook;
+    }
+    toggleRead(button) {
+        this.read = this.read ? false : true;
+        button.innerText = this.read ? "Read" : "Unread";
+        if (button.classList.contains("read")) {
+            button.classList.remove("read");
+            button.classList.add("unread");
+        }
+        else {
+            button.classList.remove("unread");
+            button.classList.add("read");
+        }
+        showLibrary();
     }
 }
 submitBook.addEventListener("click", (e) => {
