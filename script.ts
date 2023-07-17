@@ -5,7 +5,7 @@ const modalToggles = document.querySelectorAll(".modalToggle")!;
 const addBookModal = document.getElementById("addBookModal")!;
 const submitBook = document.getElementById("submitBook")!;
 
-function addModalButton(modalToggles: NodeList) {
+function bindModalButtons(modalToggles: NodeList) {
   modalToggles.forEach((button) => {
     button.addEventListener("click", () => {
       addBookModal.classList.toggle("show");
@@ -13,7 +13,59 @@ function addModalButton(modalToggles: NodeList) {
   });
 }
 
-addModalButton(modalToggles);
+class Book {
+  title: string;
+  author: string;
+  pages: number;
+  read: boolean;
+
+  constructor(title: string, author: string, pages: number, read: boolean) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
+
+  createDisplayBook(book: Book, index: number) {
+    // Create the book container
+    const displayBook = document.createElement("div");
+    displayBook.classList.add("book");
+
+    // Create the heading info
+    const title = document.createElement("h3");
+    title.innerText = book.title;
+    displayBook.appendChild(title);
+    const author = document.createElement("h4");
+    author.innerText = `By: ${book.author}`;
+    displayBook.appendChild(author);
+
+    // Create the detailed info
+    const info = document.createElement("div");
+    info.classList.add("info");
+    const pages = document.createElement("p");
+    pages.innerText = `Pages: ${book.pages.toString()}`;
+    info.appendChild(pages);
+    const read = document.createElement("p");
+    read.innerText = book.read ? "Read" : "Unread";
+    info.appendChild(read);
+    // Create button to remove from library
+    const removeButton = document.createElement("button");
+    removeButton.dataset.index = index.toString();
+    removeButton.classList.add("removeBook");
+    removeButton.innerText = "Remove";
+    removeButton.addEventListener("click", () => {
+      if (removeButton.dataset.index === undefined) {
+        throw new Error("This button is missing an index");
+      }
+      const index: number = parseInt(removeButton.dataset.index);
+      removeBook(index);
+    });
+    info.appendChild(removeButton);
+    displayBook.appendChild(info);
+
+    return displayBook;
+  }
+}
 
 submitBook.addEventListener("click", (e) => {
   e.preventDefault();
@@ -39,58 +91,25 @@ submitBook.addEventListener("click", (e) => {
   addBook(title, author, pages, read);
 });
 
-class Book {
-  title: string;
-  author: string;
-  pages: number;
-  read: boolean;
-
-  constructor(title: string, author: string, pages: number, read: boolean) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-  }
-}
-
 function addBook(title: string, author: string, pages: number, read: boolean) {
   const newBook = new Book(title, author, pages, read);
   library.push(newBook);
   showLibrary();
 }
 
-function createDisplayBook(book: Book) {
-  // Create the book container
-  const displayBook = document.createElement("div");
-  displayBook.classList.add("book");
-
-  // Create the heading info
-  const title = document.createElement("h3");
-  title.innerText = book.title;
-  displayBook.appendChild(title);
-  const author = document.createElement("h4");
-  author.innerText = `By: ${book.author}`;
-  displayBook.appendChild(author);
-
-  // Create the detailed info
-  const info = document.createElement("div");
-  info.classList.add("info");
-  const pages = document.createElement("p");
-  pages.innerText = `Pages: ${book.pages.toString()}`;
-  info.appendChild(pages);
-  const read = document.createElement("p");
-  read.innerText = book.read ? "Read" : "Unread";
-  info.appendChild(read);
-  displayBook.appendChild(info);
-
-  return displayBook;
+function removeBook(index: number) {
+  library.splice(index, 1);
+  showLibrary();
 }
 
 function showLibrary() {
   bookCase.innerHTML = "";
   bookCase.appendChild(addBookButton);
   for (const book of library) {
-    const displayBook: HTMLDivElement = createDisplayBook(book);
+    const displayBook: HTMLDivElement = book.createDisplayBook(
+      book,
+      library.indexOf(book)
+    );
     bookCase?.appendChild(displayBook);
   }
 }
@@ -98,3 +117,5 @@ function showLibrary() {
 for (let i = 0; i < 10; i++) {
   addBook("Pizza", "Pizza Lover", 10, false);
 }
+
+bindModalButtons(modalToggles);
